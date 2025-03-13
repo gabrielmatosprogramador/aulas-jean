@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Document</title>
+        <style>
+            .invisivel{
+                visibility: hidden;
+            }
+
+            .hidden{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            //let c = 21;
+        </script>
+        <h1>Nome da Turma</h1>
+        <h2>Descrição</h2>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quasi laudantium in aperiam aspernatur assumenda, cum quae, odit ipsam quidem maxime iusto minima iste adipisci atque culpa minus illo tenetur?
+        <h2>Horários</h2>
+        Em alguns dias
+        <h2>Alunos</h2>
+        <ul id="listaDeAlunos">
+            
+        </ul>
+        <button id="botaoDeCarregar" onclick="buscarAlunos()">Buscar Alunos</button>
+        <button id="botaoDeLimpar" class="hidden" onclick="limpaLista()">Limpar lista</button>
+        <script>
+            /*Não fazer dessa forma*/
+            //var a = 54;
+
+            /*Fazer de preferência assim. Variavel constante que não pode ser modificada*/
+            //const b = 10
+
+            /*Fazer uma var que pode ser mudada. Ainda assim, elas existem somente dentro do seu escopo ou em escopos menores*/
+            //c=58;
+            //alert(a);
+
+            /*Usar WHILE quando o tamanho do laço não é definido e FOR quando tem um lenght, sempre adicionando +1 ao contador*/
+            /*Usar Switch/case como uma forma de executar por transbordamento. Roda A, B e C. Ou Não roda A mas roda B e C*/
+            
+            const alunos = [
+                'Cristina', 'Mateus', 'Diego', 'Lucio', 'Lukas', 'Luiza', 'Gabriela', 'Larissa', 'Julio', 'Debora'
+            ];
+            function buscarAlunos() {
+                const ul = document.getElementById("listaDeAlunos");
+                //ul.innerHTML = "";
+                let itens = '';
+
+                for(let i = 0; i < alunos.length; i++){
+                    itens = itens + '<li>'+alunos[i]+'</li>';
+                };
+
+                ul.innerHTML = itens;
+
+                /*Visibility: hidden = O elemento acupa espaço mas não aparece. Já o Display: none = Não ocupa espaço e não aparece*/
+                document.getElementById("botaoDeCarregar").classList.add("hidden");
+                document.getElementById("botaoDeLimpar").classList.remove("hidden");
+
+                
+            }
+
+            function limpaLista(){
+                const ul = document.getElementById("listaDeAlunos");
+                ul.innerHTML = '';
+                document.getElementById("botaoDeCarregar").classList.remove("hidden");
+                document.getElementById("botaoDeLimpar").classList.add("hidden");
+            }
+
+        </script>
+    </body>
+</html>
