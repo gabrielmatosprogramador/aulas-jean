@@ -123,6 +123,21 @@ function criaListaAlunos(alunos) {
         })
     .catch((erro)=>{console.log(erro.message);});
 
+
+    fetch("http://localhost:3000/alunos").then((response)=>{console.log(response);
+            response.json()
+            .then((dados)=>{
+                console.log(dados);
+                dados.forEach((t)=> alunos.set(t.id,t));
+                console.log(alunos);
+                refresh();
+                //não da pq turmas é uma const
+                //turmas = dados;
+            })
+                .catch((erro)=>{console.log(erro.message);});
+        })
+    .catch((erro)=>{console.log(erro.message);});
+
     console.log("Depois do fetch", turmas);
 
     refresh();
