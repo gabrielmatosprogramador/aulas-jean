@@ -1,40 +1,5 @@
-const turmas = 
-    [
-    {
-        id: "UC1",
-        nome: "Usabilidade e Dev Web",
-        ementa: "asdflkj df lsdjfsdlfkj sdlf",
-        diasAula: "5as e 6as às 19h",
-        alunos: ['123', '456', '789']
-    },
-    {
-        id: "UC2",
-        nome: "Sistemas Distribuídos",
-        ementa: "asdflkj df lsdjfsdlfkj sdlf",
-        diasAula: "2as e 3as às 19h",
-        alunos: ['123', '789']
-        
-    }];
-    const alunos = new Map();
-    alunos.set('123',{
-            ra:'123',
-            nome: 'Luana',
-            idade: 20,
-            sexo: 'F'
-        });
-    alunos.set('456',
-        {
-            nome: 'João',
-            idade: 21,
-            sexo: 'M'
-        });
-    alunos.set('789',    
-        {
-            ra: '789',
-            nome: 'Luano',
-            idade: 22,
-            sexo: 'M'
-        });
+const turmas = [];
+const alunos = new Map();
     
     function buscaAluno(ra) {
         let aluno = alunos.get(ra);
@@ -137,4 +102,82 @@ function criaListaAlunos(alunos) {
         app.appendChild(lista);*/
     }
 
+    //Sucesso = then()  Falha = catch()
+    //usar Arrow functions quando for usar a função somente no local e funções primitivas quando for reutilizavel
+
+    console.log("Antes do fetch", turmas);
+function carregaTurmas(){
+    fetch("http://localhost:3000/turmas")
+    .then(
+        (response)=>{
+            console.log(response);
+            response.json()
+            .then((dados)=>{
+                console.log(dados);
+                dados.forEach((t)=> turmas.push(t));
+                console.log("turma",turmas);
+                refresh();
+                //não da pq turmas é uma const
+                //turmas = dados;
+            })
+            .catch((erro)=>{console.log(erro.message);});
+        })
+        .catch((erro)=>{console.log(erro.message);});
+    }
+/*
+function carregaAlunos2(callback, callbackErro){
+    fetch("http://localhost:3000/alunos").then((response)=>{console.log(response);
+        response.json()
+        .then((dados)=>{
+            console.log(dados);
+            dados.forEach((t)=> alunos.set(t.id,t));
+            callback();
+        })
+        .catch((erro)=>callbackErro(erro));
+    })
+    .catch((erro)=>callbackErro(erro));
+}
+    */
+
+function carregaAlunos(){
+    return new Promise(
+        (resolved, rejectd)=>{
+            fetch("http://localhost:3000/alunos").then(
+                async (response)=>{console.log(response);
+                let dados = await response.json()
+                .then((dados)=>{
+                    console.log(dados);
+                    dados.forEach((t)=> alunos.set(t.id,t));
+                    resolved();
+                })
+                .catch((erro)=>rejectd(erro));
+            })
+            .catch((erro)=>rejectd(erro));
+        }
+    );}
+
+    console.log("Depois do fetch", turmas);
+
+    carregaAlunos().then(()=>carregaTurmas()).catch((erro)=> console.log(erro));
+
     refresh();
+
+
+
+/*
+    function carregaAlunos(){
+        return new Promise(
+            (resolved, rejectd)=>{
+                fetch("http://localhost:3000/alunos").then((response)=>{console.log(response);
+                    response.json()
+                    .then((dados)=>{
+                        console.log(dados);
+                        dados.forEach((t)=> alunos.set(t.id,t));
+                        resolved();
+                    })
+                    .catch((erro)=>rejectd(erro));
+                })
+                .catch((erro)=>rejectd(erro));
+            }
+        );}
+*/
