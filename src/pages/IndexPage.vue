@@ -1,5 +1,6 @@
 <template>
   <q-page class="flex flex-center">
+    <router-link to="/novoProduto"> cadastrar novo produto </router-link>
     <q-checkbox v-model="logado" />
     <card-produto
       @addCart="colocaCarrinho"

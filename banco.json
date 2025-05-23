@@ -1,19 +1,43 @@
 {
   "produtos": [
     {
-      "id": 1,
+      "id": "1",
       "nome": "Produto A",
-      "preco": 10.0
+      "preco": 10
     },
     {
-      "id": 2,
+      "id": "2",
       "nome": "Produto B",
-      "preco": 20.0
+      "preco": 20
     },
     {
-      "id": 3,
+      "id": "3",
       "nome": "Produto C",
-      "preco": 30.0
+      "preco": 30
+    },
+    {
+      "id": "7c14",
+      "nome": "teste",
+      "categoria": "Eletrônicos",
+      "preco": 12,
+      "descricao": "teste desc",
+      "urlImagem": ""
+    },
+    {
+      "id": "e019",
+      "nome": "noteboook acer",
+      "categoria": "Eletrônicos",
+      "preco": 1.23,
+      "descricao": "adadasda",
+      "urlImagem": ""
+    },
+    {
+      "id": "d0d3",
+      "nome": "monitor",
+      "categoria": "Eletrônicos",
+      "preco": 1234.56,
+      "descricao": "",
+      "urlImagem": ""
     }
   ]
 }
