@@ -29,3 +29,12 @@ export function salvaProduto(produto) {
     }
   })
 }
+
+export function tiraItem(produto) {
+  return new Promise((resolve, reject) => {
+    api
+      .delete(`/produtos/${produto.id}`)
+      .then(() => resolve())
+      .catch((error) => reject(error))
+  })
+}

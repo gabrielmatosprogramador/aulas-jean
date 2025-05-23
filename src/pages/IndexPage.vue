@@ -8,6 +8,7 @@
       v-bind:key="prod.id"
       :produto="prod"
       :mostraBotao="logado"
+      @removeItem="tiraItem"
     />
   </q-page>
 </template>
@@ -16,6 +17,7 @@
 import { defineComponent } from 'vue'
 import CardProduto from 'src/components/CardProduto.vue'
 import axios from 'axios'
+import { tiraItem } from 'src/services/index.js'
 
 export default defineComponent({
   name: 'IndexPage',
@@ -44,6 +46,16 @@ export default defineComponent({
   methods: {
     colocaCarrinho(qtd, produto) {
       alert('Produto adicionado ao carrinho: ' + qtd + ' x ' + produto.nome)
+    },
+    async tiraItem(produto) {
+      try {
+        console.log('Removendo:', produto.id)
+        await tiraItem(produto)
+        this.produtos = this.produtos.filter((p) => p.id !== produto.id)
+      } catch (error) {
+        console.error('Erro ao remover produto:', error)
+        alert('Erro ao remover produto: ' + error.message)
+      }
     },
   },
 })

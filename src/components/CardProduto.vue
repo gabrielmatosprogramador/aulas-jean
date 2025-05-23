@@ -25,6 +25,14 @@
         icon="add_shopping_cart"
         label="Colocar no Carrinho"
       />
+
+      <q-btn
+        outlined
+        @click="removeItem"
+        text-color="white"
+        icon="remove_shopping_cart"
+        label="Remover do Carrinho"
+      />
     </q-card-actions>
   </q-card>
 </template>
@@ -43,10 +51,13 @@ export default {
       qtd: 1,
     }
   },
-  emits: ['addCart'],
+  emits: ['addCart', 'removeItem'],
   methods: {
     addCart() {
       this.$emit('addCart', this.qtd, this.produto)
+    },
+    removeItem() {
+      this.$emit('removeItem', this.produto)
     },
   },
 }
